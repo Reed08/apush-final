@@ -190,7 +190,7 @@ function Section({
 }) {
   return (
     <section id={id} className={cn('py-24 px-6', className)}>
-      <div className={cn('max-w-4xl mx-auto', innerClassName)}>{children}</div>
+      <div className={cn('max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto', innerClassName)}>{children}</div>
     </section>
   );
 }
@@ -200,11 +200,15 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function SectionHeading({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <h2 className={cn('font-display text-4xl text-foreground mb-8', className)}>{children}</h2>;
+  return <h2 className={cn('font-display text-4xl 2xl:text-5xl text-foreground mb-8', className)}>{children}</h2>;
 }
 
 function SectionIntro({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <p className={cn('font-body text-foreground leading-relaxed max-w-prose', className)}>{children}</p>;
+  return (
+    <p className={cn('font-body text-foreground leading-relaxed max-w-prose xl:text-lg 2xl:text-xl', className)}>
+      {children}
+    </p>
+  );
 }
 
 type TimelineEventData = (typeof timelineEvents)[number];
@@ -218,7 +222,7 @@ function TimelineEvent({ event }: { event: TimelineEventData }) {
     <div className='relative pl-12 mb-10'>
       <div className='absolute left-2.75 top-1.5 w-2.5 h-2.5 rounded-full bg-primary' />
       <p className='font-display text-primary text-sm font-semibold'>{event.date}</p>
-      <p className='font-body text-foreground leading-relaxed mt-1'>{event.description}</p>
+      <p className='font-body text-foreground leading-relaxed mt-1 xl:text-lg 2xl:text-xl'>{event.description}</p>
     </div>
   );
 }
@@ -273,7 +277,9 @@ function DefiningMomentCard({ moment, index }: { moment: MomentData; index: numb
             sizes='45vw'
           />
         </div>
-        <p className='font-body text-xs italic text-muted-foreground text-center px-4 py-3'>{moment.caption}</p>
+        <p className='font-body text-xs xl:text-sm italic text-muted-foreground text-center px-4 py-3'>
+          {moment.caption}
+        </p>
       </div>
 
       {/* CardContent keeps data-slot="card-content" for theme hooks */}
@@ -283,7 +289,7 @@ function DefiningMomentCard({ moment, index }: { moment: MomentData; index: numb
         {moment.paragraphs.map((p, i) => (
           <p
             key={i}
-            className={`font-body text-foreground leading-loose ${i === moment.paragraphs.length - 1 ? 'mb-8' : 'mb-4'}`}
+            className={`font-body text-foreground leading-loose 2xl:text-lg ${i === moment.paragraphs.length - 1 ? 'mb-8' : 'mb-4'}`}
           >
             {p}
           </p>
@@ -293,7 +299,7 @@ function DefiningMomentCard({ moment, index }: { moment: MomentData; index: numb
             <source src={moment.audio} type='audio/wav' />
           </audio>
         )}
-        <blockquote className='border-l-4 border-accent pl-4 font-display italic text-accent mt-auto'>
+        <blockquote className='border-l-4 border-accent pl-4 font-display italic text-accent mt-auto 2xl:text-lg'>
           {moment.pullQuote}
         </blockquote>
       </CardContent>
@@ -316,17 +322,17 @@ export default function Home() {
         <Image src={heroImg} alt='Vintage radio broadcast studio' fill className='object-cover' priority />
         <div className='absolute inset-0 bg-foreground/80' />
 
-        <div className='relative z-10 text-center px-6 max-w-4xl mx-auto'>
+        <div className='relative z-10 text-center px-6 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto'>
           <div className='hidden md:flex justify-center mb-8'>
             <HeroQRCode url='https://radio.reed920.xyz' />
           </div>
           <p className='font-display text-primary text-xs uppercase tracking-widest mb-6'>
             America at 250 · Defining American Identity
           </p>
-          <h1 className='font-display text-background text-5xl md:text-7xl font-bold leading-tight mb-8'>
+          <h1 className='font-display text-background text-5xl md:text-7xl 2xl:text-8xl font-bold leading-tight mb-8'>
             Tune In: How Radio Defined America
           </h1>
-          <p className='font-body text-background/70 text-xl leading-relaxed max-w-2xl mx-auto'>
+          <p className='font-body text-background/70 text-xl 2xl:text-2xl leading-relaxed max-w-2xl mx-auto'>
             Radio transformed American identity by connecting people across barriers of race, literacy, and location.
           </p>
         </div>
@@ -349,7 +355,7 @@ export default function Home() {
 
       {/* No Section wrapper — the cards must break out of the content column */}
       <section id='defining-moments' className='pt-24 border-t border-border'>
-        <div className='max-w-4xl mx-auto px-6 mb-16'>
+        <div className='max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-6 mb-16'>
           <SectionLabel>Defining Moments</SectionLabel>
           <SectionHeading>The Moments That Shaped America</SectionHeading>
           <SectionIntro>
@@ -366,15 +372,17 @@ export default function Home() {
 
       <Section id='the-argument' className='bg-muted'>
         <SectionLabel>The Argument</SectionLabel>
-        <SectionHeading className='text-5xl mb-12 leading-tight'>Why Radio Defined American Identity</SectionHeading>
+        <SectionHeading className='text-5xl 2xl:text-6xl mb-12 leading-tight'>
+          Why Radio Defined American Identity
+        </SectionHeading>
 
-        <p className='font-body text-foreground leading-loose mb-6'>
+        <p className='font-body text-foreground leading-loose xl:text-lg 2xl:text-xl mb-6'>
           When examining radio’s history and defining moments, one key thread jumps out. Throughout history, radio has
           dissolved barriers. Radio reached everyone simultaneously regardless of literacy, location, or race, and that
           caused Americans to develop a more unified national identity together.
         </p>
 
-        <p className='font-body text-foreground leading-loose mb-6'>
+        <p className='font-body text-foreground leading-loose xl:text-lg 2xl:text-xl mb-6'>
           Roosevelt’s Fireside Chats allowed the president to bypass the media and speak directly to every citizen
           equally. This unified Americans in a never-before-seen way, drawing them closer to their executive than ever
           before. Building on this momentum, radio propelled the rhythm and blues music of Black culture into white
@@ -386,7 +394,7 @@ export default function Home() {
           attacked Manhattan in Wells’s story, real panic followed in its wake.
         </p>
 
-        <p className='font-body text-foreground leading-loose mb-6'>
+        <p className='font-body text-foreground leading-loose xl:text-lg 2xl:text-xl mb-6'>
           Together, these details drive home radio’s extraordinary role in defining American identity. By connecting the
           people together despite obstacles, radio allowed for an unprecedented mixing of tradition into one unified
           culture. No other technology is quite as pivotal as radio because radio was simply so all encompassing. The
@@ -405,7 +413,7 @@ export default function Home() {
             />
           </div>
           <CardContent className='border-t border-border py-3 px-4 text-center'>
-            <p className='font-body text-xs italic text-muted-foreground'>
+            <p className='font-body text-xs xl:text-sm italic text-muted-foreground'>
               A 1927 map of American radio stations depicts radio’s wide reach in the country.
             </p>
           </CardContent>
